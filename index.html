@@ -18,9 +18,10 @@
         body {
             background: #5c94fc;
             font-family: 'ZCOOL KuaiLe', sans-serif, "Microsoft JhengHei";
-            overflow: hidden;
+            overflow-x: hidden;
             user-select: none;
-            height: 100vh;
+            min-height: 100vh;
+            padding-bottom: 80px;  /* 留位置給地面與 Mario */
         }
         .mario-card {
             background: white;
@@ -337,6 +338,68 @@
             background: var(--mario-green);
             border: 2px solid #000;
             clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+
+        /* === 手機 / 直立 iPad（≤768px）：壓縮版面、縮小世界元素 === */
+        @media (max-width: 768px) {
+            /* HUD 縮小 */
+            body > div:first-of-type + div + div { font-size: 1rem !important; padding: 0.75rem !important; }
+            .text-3xl { font-size: 1.05rem !important; }
+            body > div.flex img { width: 1.25rem !important; height: 1.25rem !important; margin-right: 0.25rem !important; }
+
+            /* 卡片內距、字體調整 */
+            .mario-card { border-width: 4px !important; box-shadow: 6px 6px 0 rgba(0,0,0,0.3) !important; }
+            #welcome-screen, #question-screen, #finish-screen { padding: 1rem !important; }
+            #welcome-screen h1 { font-size: 2rem !important; margin-bottom: 0.75rem !important; }
+            #welcome-screen p { font-size: 1.05rem !important; margin-bottom: 1rem !important; }
+            #welcome-screen input { font-size: 1.1rem !important; padding: 0.75rem !important; margin-bottom: 1rem !important; }
+            #welcome-screen button.brick-btn { font-size: 1.4rem !important; padding: 0.9rem !important; margin-bottom: 1rem !important; }
+            #question-text { font-size: 1.1rem !important; line-height: 1.5 !important; margin-bottom: 0.6rem !important; }
+            #chinese-translate { font-size: 0.85rem !important; padding: 0.6rem !important; border-width: 2px !important; }
+            #options-container { gap: 0.6rem !important; }
+            .option-card { padding: 0.6rem !important; font-size: 0.95rem !important; border-width: 2px !important; }
+            .option-card span:first-child { width: 2rem !important; height: 2rem !important; font-size: 0.85rem !important; margin-right: 0.5rem !important; border-width: 1px !important; }
+            .hint-box { font-size: 0.85rem !important; padding: 0.5rem !important; }
+            .brick-btn { font-size: 1rem !important; padding: 0.6rem 1rem !important; }
+            #finish-screen h1 { font-size: 2rem !important; }
+            #finish-screen p { font-size: 1.1rem !important; margin-bottom: 1.5rem !important; }
+            #finish-screen img { width: 4rem !important; height: 4rem !important; }
+
+            /* 世界元素縮小 + 重新定位 */
+            .mario-char { width: 50px !important; height: 50px !important; bottom: 38px !important; left: 8px !important; }
+            .monster { width: 36px !important; height: 36px !important; bottom: 38px !important; }
+            .q-block-hit {
+                width: 42px !important;
+                height: 42px !important;
+                left: 12px !important;
+                bottom: 110px !important;
+                font-size: 1.4rem !important;
+                border-width: 3px !important;
+            }
+            .ground { height: 38px !important; border-top-width: 3px !important; background-size: 28px 28px !important; }
+            .cloud { display: none !important; }
+
+            /* 重新調整 Mario 跳躍高度，配合磚塊新位置 */
+            @keyframes marioJump {
+                0%   { transform: translate(0, 0)     rotate(0deg);   }
+                30%  { transform: translate(0, -42px) rotate(120deg); }
+                45%  { transform: translate(0, -68px) rotate(200deg); }
+                55%  { transform: translate(0, -62px) rotate(240deg); }
+                75%  { transform: translate(0, -26px) rotate(340deg); }
+                100% { transform: translate(0, 0)     rotate(360deg); }
+            }
+
+            /* 星星與 COMBO 橫幅縮小 */
+            .star-fly { font-size: 2.4rem !important; }
+            .streak-banner { font-size: 3rem !important; top: 18% !important; }
+            .point-float { font-size: 1.4rem !important; }
+        }
+
+        /* === 超小機（≤400px iPhone）再壓一檔 === */
+        @media (max-width: 400px) {
+            #question-text { font-size: 1rem !important; }
+            .option-card { font-size: 0.9rem !important; padding: 0.5rem !important; }
+            #welcome-screen h1 { font-size: 1.7rem !important; }
         }
     </style>
 </head>
